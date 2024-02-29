@@ -1,0 +1,158 @@
+:root {
+  --bg-color: aliceblue;
+  --color: midnightblue;
+  --shadow-color: #b0aeae;
+  --color1: rgb(213, 211, 208);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  background-color: var(--color1);
+  height: 100vh;
+  display: flex;
+}
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background-color: var(--bg-color);
+  padding: 10px 20px;
+  box-shadow: 0px 3px var(--shadow-color);
+}
+header nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+h2 > span {
+  font-size: 16px;
+}
+img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--color);
+}
+main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+aside {
+  grid-area: 1 / 2 / 2 /3;
+  padding: 10px;
+  display: grid;
+}
+aside > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+aside > div > div {
+  background-color: var(--bg-color);
+  box-shadow: -3px 3px var(--shadow-color);
+  border-radius: 5px;
+}
+aside > div > div > div {
+  margin: 10px;
+  padding: 10px;
+}
+.topic > div:not(:last-child) {
+  border-bottom: 2px solid var(--shadow-color);
+}
+.accounts > div {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 5px;
+}
+.accounts > div a {
+  color: black;
+}
+.accounts > div a:hover {
+  text-decoration: underline;
+}
+.accounts > div > div {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+}
+.content {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  display: flex;
+  width: fit-content;
+  padding: 10px 10px 0 10px;
+}
+.header h2 {
+  opacity: 0.2;
+  background-color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+.project,
+.about {
+  background-color: var(--bg-color);
+  padding: 10px;
+}
+.content > div:last-child {
+  flex: 1;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+}
+.content > div > div {
+  background-color: var(--color1);
+  padding: 10px;
+  border-radius: 5px;
+  border-left: 5px solid var(--color);
+  box-shadow: -2px 2px var(--color), -3px 3px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+}
+.content > div > div p {
+  flex: 1;
+}
+.content > div > div > div {
+  align-self: flex-end;
+}
+.content > div > div > div > a {
+  color: black;
+}
+.content > div > div > div > a:hover {
+  color: blue;
+}
+.search {
+  display: none;
+  padding: 10px;
+  background-color: aliceblue;
+}
+label {
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  position: absolute;
+  padding: 5px;
+}
+input[type="search"] {
+  appearance: none;
+  -moz-appearance: none;
+  padding: 5px 10px;
+  outline: none;
+  border: 2px solid var(--color);
+  border-radius: 25px;
+  width: 50%;
+  text-align: center;
+  font-size: 16px;
+}
