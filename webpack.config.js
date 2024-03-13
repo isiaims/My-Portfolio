@@ -20,7 +20,6 @@ module.exports = {
             loader: "file-loader",
           },
         ],
-        type: "asset/resource",
       },
     ],
   },

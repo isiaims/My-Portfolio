@@ -1,8 +1,16 @@
-:root {
-  --bg-color: aliceblue;
-  --color: midnightblue;
+[data-theme="light"] {
+  --bg-0: aliceblue;
+  --bg-1: rgb(213, 211, 208);
+  --bg-2: #b0aeae;
+  --shadow-color: rgb(1, 1, 34);
+  --color-0: #000000;
+}
+[data-theme="dark"] {
+  --bg-0: rgb(1, 1, 34);
+  --bg-1: rgb(4, 4, 69);
+  --bg-2: rgb(1, 1, 34);
   --shadow-color: #b0aeae;
-  --color1: rgb(213, 211, 208);
+  --color-0: aliceblue;
 }
 * {
   margin: 0;
@@ -13,9 +21,12 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
-  background-color: var(--color1);
+  background-color: var(--bg-1);
+  color: var(--color-0);
   height: 100vh;
   display: flex;
+  overflow: hidden;
+  transition: all 0.25s ease;
 }
 .container {
   flex: 1;
@@ -23,11 +34,15 @@ body {
   flex-direction: column;
 }
 header {
-  background-color: var(--bg-color);
+  background-color: var(--bg-0);
   padding: 10px 20px;
-  box-shadow: 0px 3px var(--shadow-color);
+  box-shadow: 0px 3px #b0aeae;
 }
 header nav {
+  display: flex;
+  justify-content: space-between;
+}
+header nav > div {
   display: flex;
   gap: 10px;
   align-items: center;
@@ -35,11 +50,11 @@ header nav {
 h2 > span {
   font-size: 16px;
 }
-img {
+img.pfp {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 2px solid var(--color);
+  border: 2px solid var(--shadow-color);
 }
 main {
   flex: 1;
@@ -57,8 +72,8 @@ aside > div {
   gap: 10px;
 }
 aside > div > div {
-  background-color: var(--bg-color);
-  box-shadow: -3px 3px var(--shadow-color);
+  background-color: var(--bg-0);
+  box-shadow: -3px 3px var(--bg-2);
   border-radius: 5px;
 }
 aside > div > div > div {
@@ -66,7 +81,7 @@ aside > div > div > div {
   padding: 10px;
 }
 .topic > div:not(:last-child) {
-  border-bottom: 2px solid var(--shadow-color);
+  border-bottom: 2px solid var(--bg-2);
 }
 .accounts > div {
   display: grid;
@@ -74,7 +89,7 @@ aside > div > div > div {
   gap: 5px;
 }
 .accounts > div a {
-  color: black;
+  color: var(--color-0);
 }
 .accounts > div a:hover {
   text-decoration: underline;
@@ -95,64 +110,141 @@ aside > div > div > div {
 }
 .header h2 {
   opacity: 0.2;
-  background-color: white;
+  background-color: var(--bg-0);
   padding: 10px;
   cursor: pointer;
 }
 .project,
 .about {
-  background-color: var(--bg-color);
+  display: none;
+  background-color: var(--bg-0);
   padding: 10px;
 }
-.content > div:last-child {
+.project.active,
+.about.active {
+  display: flex;
+  flex-direction: column;
+}
+.project.active {
   flex: 1;
+}
+.projects {
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-auto-rows: 1fr;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 10px;
 }
-.content > div > div {
-  background-color: var(--color1);
+.projects > div {
+  background-color: var(--bg-1);
   padding: 10px;
   border-radius: 5px;
-  border-left: 5px solid var(--color);
-  box-shadow: -2px 2px var(--color), -3px 3px var(--shadow-color);
+  border-left: 5px solid var(--shadow-color);
+  box-shadow: -2px 2px var(--shadow-color), -3px 3px var(--bg-2);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
-.content > div > div p {
+.projects > div > a.link {
+  position: absolute;
+  width: 100%;
+  height: 75%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.projects > div p {
   flex: 1;
 }
-.content > div > div > div {
+.projects > div > div {
   align-self: flex-end;
+  display: flex;
+  gap: 3px;
 }
-.content > div > div > div > a {
-  color: black;
+.projects > div > div > p {
+  color: var(--color-0);
 }
-.content > div > div > div > a:hover {
+.projects > div > div > p:hover {
   color: blue;
 }
 .search {
-  display: none;
+  background-color: var(--bg-0);
   padding: 10px;
-  background-color: aliceblue;
 }
-label {
+.search > label {
   border: none;
   cursor: pointer;
   font-size: 16px;
   position: absolute;
   padding: 5px;
 }
+.search > label > i {
+  color: rgb(1, 1, 34);
+}
 input[type="search"] {
   appearance: none;
   -moz-appearance: none;
   padding: 5px 10px;
   outline: none;
-  border: 2px solid var(--color);
+  border: 2px solid var(--shadow-color);
   border-radius: 25px;
   width: 50%;
   text-align: center;
   font-size: 16px;
+}
+.theme-switch {
+  height: 2.5rem;
+  width: 2.5rem;
+  background-color: transparent;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  position: relative;
+  border: none;
+  border-radius: 100%;
+  filter: none;
+  transition: all 0.25s ease;
+}
+.sun {
+  z-index: 1;
+  width: 2.24rem;
+  height: 2.24rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-color: rgb(255, 200, 0);
+  transition: all 0.25s ease;
+}
+.moon {
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 100%;
+  background-color: rgb(1, 1, 34);
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+input:checked ~ .moon {
+  height: 2.2rem;
+  width: 0rem;
+  border-style: solid;
+  border: 0;
+  border-radius: 100%;
+  top: 50%;
+  left: 150%;
+  background-color: rgb(1, 1, 34);
+  transform: translate(-50%, -50%);
 }
